@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	private float yVelocity;
 	private Vector3 moveDirection = Vector3.zero;
 	public float gravity = 20.0f;
+	bool isGrounded;
 
 
     private void OnTriggerEnter(Collider other)
@@ -75,6 +76,8 @@ public class Player : MonoBehaviour {
             //anim.SetInteger("JumpPar", 0);
 			
         }
+
+
 		
 		velocity.y = yVelocity;
 		controller.Move(velocity * Time.deltaTime);
@@ -86,4 +89,6 @@ public class Player : MonoBehaviour {
 		moveDirection.y -= gravity * Time.deltaTime;
 
 	}
+
+
 }
