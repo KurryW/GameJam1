@@ -24,24 +24,25 @@ public class Player : MonoBehaviour {
 	float beginJumpTime = 0;
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-		if (other.CompareTag("Water"))
+	private void OnCollisionEnter(Collision other)
+	{
+
+		if (other.gameObject.CompareTag("Ground"))
 		{
-			waterSound.Play();
+			isGrounded = true;
 		}
-		
-    }
+	}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Water"))
-        {
-            waterSound.Stop();
-        }
-    }
+	private void OnCollisionExit(Collision other)
+	{
 
-    void Start () 
+		if (other.gameObject.CompareTag("Ground"))
+		{
+			isGrounded = false;
+		}
+	}
+
+	void Start () 
 	{
 		controller = GetComponent <CharacterController>();
 		//anim = gameObject.GetComponentInChildren<Animator>();
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour {
 		
 		moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
 
-		if(isGrounded == true)
+		if (controller.isGrounded)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -76,17 +77,19 @@ public class Player : MonoBehaviour {
             //anim.SetInteger("JumpPar", 1);
 			
 		}
-			else
+			
+		}
+		else
 		{
 			yVelocity -= gravity;
             //anim.SetInteger("JumpPar", 0);
 			
         }
-		}
+
 
 		float currentAirTime = Time.time - beginJumpTime;
 
-		if (isGrounded == true && (currentAirTime >= 90f && currentAirTime <= 139f))
+		if (controller.isGrounded == true && (currentAirTime >= 90f && currentAirTime <= 139f))
 		{
             SceneManager.LoadScene("GameOver");
         }
