@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 //using UnityEditor.Experimental.GraphView;
 
 public class Player : MonoBehaviour {
@@ -19,6 +21,7 @@ public class Player : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	public float gravity = 20.0f;
 	bool isGrounded;
+	float beginJumpTime = 0;
 
 
     private void OnTriggerEnter(Collider other)
@@ -64,17 +67,28 @@ public class Player : MonoBehaviour {
 		
 		moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		if(isGrounded == true)
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
 		{
 			yVelocity = jumpHeight;
+			beginJumpTime = Time.time;
             //anim.SetInteger("JumpPar", 1);
 			
 		}
-		else
+			else
 		{
 			yVelocity -= gravity;
             //anim.SetInteger("JumpPar", 0);
 			
+        }
+		}
+
+		float currentAirTime = Time.time - beginJumpTime;
+
+		if (isGrounded == true && (currentAirTime >= 90f && currentAirTime <= 139f))
+		{
+            SceneManager.LoadScene("GameOver");
         }
 
 
