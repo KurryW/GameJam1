@@ -24,23 +24,23 @@ public class Player : MonoBehaviour {
 	float beginJumpTime = 0;
 
 
-	private void OnCollisionEnter(Collision other)
-	{
+	//private void OnCollisionEnter(Collision other)
+	//{
 
-		if (other.gameObject.CompareTag("Ground"))
-		{
-			isGrounded = true;
-		}
-	}
+	//	if (other.gameObject.CompareTag("Ground"))
+	//	{
+	//		isGrounded = true;
+	//	}
+	//}
 
-	private void OnCollisionExit(Collision other)
-	{
+	//private void OnCollisionExit(Collision other)
+	//{
 
-		if (other.gameObject.CompareTag("Ground"))
-		{
-			isGrounded = false;
-		}
-	}
+	//	if (other.gameObject.CompareTag("Ground"))
+	//	{
+	//		isGrounded = false;
+	//	}
+	//}
 
 	void Start () 
 	{
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour {
 		
 		moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
 
-		if (controller.isGrounded)
+		//if (controller.isGrounded)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -77,14 +77,14 @@ public class Player : MonoBehaviour {
             //anim.SetInteger("JumpPar", 1);
 			
 		}
-			
-		}
-		else
+			else
 		{
 			yVelocity -= gravity;
             //anim.SetInteger("JumpPar", 0);
 			
         }
+		}
+		
 
 
 		float currentAirTime = Time.time - beginJumpTime;

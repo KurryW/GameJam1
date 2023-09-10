@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HurtPlayer : MonoBehaviour
+{
+    public int damageToGive;
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerHealth>().HurtPlayer(damageToGive);
+        }
+    }
+
+}
