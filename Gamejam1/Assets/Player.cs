@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-	//private Animator anim;
+	private Animator anim;
 	private CharacterController controller;
 
     public AudioSource footstepsSound;
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
 	void Start () 
 	{
 		controller = GetComponent <CharacterController>();
-		//anim = gameObject.GetComponentInChildren<Animator>();
+		anim = gameObject.GetComponentInChildren<Animator>();
 	}
 
 	void Update()
@@ -54,18 +54,18 @@ public class Player : MonoBehaviour {
 		Vector3 direction = new Vector3(horizontalInput, 0, 0);
 		Vector3 velocity = direction * speed;
 
-		//if (Input.GetKey("w"))
-		//{
-		//	anim.SetInteger("AnimationPar", 1);
-  //          footstepsSound.enabled = true;
-  //      }
-		//else
-		//{
-		//	anim.SetInteger("AnimationPar", 0);
-  //          footstepsSound.enabled = false;
-  //      }
+		if (Input.GetKey(KeyCode.W))
+		{
+			anim.SetInteger("AnimationPar", 1);
+			//footstepsSound.enabled = true;
+		}
+		else
+		{
+			anim.SetInteger("AnimationPar", 0);
+			//footstepsSound.enabled = false;
+		}
 
-		
+
 		moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
 
 		//if (controller.isGrounded)
@@ -74,15 +74,15 @@ public class Player : MonoBehaviour {
 		{
 			yVelocity = jumpHeight;
 			beginJumpTime = Time.time;
-            //anim.SetInteger("JumpPar", 1);
-			
-		}
+			anim.SetInteger("JumpPar", 1);
+
+			}
 			else
 		{
 			yVelocity -= gravity;
-            //anim.SetInteger("JumpPar", 0);
-			
-        }
+			anim.SetInteger("JumpPar", 0);
+
+			}
 		}
 		
 

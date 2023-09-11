@@ -6,7 +6,7 @@ public class HurtPlayer : MonoBehaviour
 {
     public int damageToGive;
 
-    public void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
