@@ -20,6 +20,6 @@ public class LoadsceneAll : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("GOGOGOGO SCENE");
-        SceneManager.LoadScene("Levels 2");
+        SceneManager.LoadScene("Victory");
     }
 }

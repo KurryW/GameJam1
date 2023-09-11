@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     //public int currentHealth;
 
     //public int maxHealth = 100;
-    public int currentHealth;
+    public static float currentHealth;
 
     //public Healthbar healthbar;
 
