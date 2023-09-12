@@ -10,7 +10,6 @@ public class Player : MonoBehaviour {
 	private CharacterController controller;
 
     public AudioSource footstepsSound;
-    public AudioSource waterSound;
 
     public float speed = 600.0f;
 	public float turnSpeed = 400.0f;
@@ -57,12 +56,12 @@ public class Player : MonoBehaviour {
 		if (Input.GetKey(KeyCode.W))
 		{
 			anim.SetInteger("AnimationPar", 1);
-			//footstepsSound.enabled = true;
+			footstepsSound.enabled = true;
 		}
 		else
 		{
 			anim.SetInteger("AnimationPar", 0);
-			//footstepsSound.enabled = false;
+			footstepsSound.enabled = false;
 		}
 
 
