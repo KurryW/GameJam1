@@ -19,27 +19,26 @@ public class Player : MonoBehaviour {
 	private float yVelocity;
 	private Vector3 moveDirection = Vector3.zero;
 	public float gravity = 20.0f;
+	[SerializeField]
 	bool isGrounded;
 	float beginJumpTime = 0;
 
+    private void OnTriggerEnter(Collider other)
+	{
 
-	//private void OnCollisionEnter(Collision other)
-	//{
+		if (other.gameObject.tag== "Ground")
+		{
+			isGrounded = true;
+		}
+	}
+    private void OnTriggerExit(Collider other)
+	{
 
-	//	if (other.gameObject.CompareTag("Ground"))
-	//	{
-	//		isGrounded = true;
-	//	}
-	//}
-
-	//private void OnCollisionExit(Collision other)
-	//{
-
-	//	if (other.gameObject.CompareTag("Ground"))
-	//	{
-	//		isGrounded = false;
-	//	}
-	//}
+		if (other.gameObject.tag == "Ground")
+		{
+			isGrounded = false;
+		}
+	}
 
 	void Start () 
 	{
@@ -65,28 +64,26 @@ public class Player : MonoBehaviour {
 		}
 
 
-		moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
+		moveDirection = transform.forward * Input.GetAxis("Vertical")  * speed;
 
-		//if (controller.isGrounded)
+		if (isGrounded)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
-		{
-			yVelocity = jumpHeight;
-			beginJumpTime = Time.time;
-			anim.SetInteger("JumpPar", 1);
-
-			}
-			else
-		{
-			yVelocity -= gravity;
-			anim.SetInteger("JumpPar", 0);
-
+			{
+				yVelocity = jumpHeight;
+				beginJumpTime = Time.time;
+				anim.SetInteger("JumpPar", 1);
 			}
 		}
-		
+        else
+        {
+            yVelocity -= gravity;
+            anim.SetInteger("JumpPar", 0);
+        }
 
 
-		float currentAirTime = Time.time - beginJumpTime;
+
+        float currentAirTime = Time.time - beginJumpTime;
 
 		if (controller.isGrounded == true && (currentAirTime >= 90f && currentAirTime <= 139f))
 		{
